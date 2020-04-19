@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var api = require('etherpad-lite-client');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -39,14 +38,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// EtherPad
-/*
-var etherpad = api.connect({
-  apikey: '',
-  host: 'localhost',
-  port: 9001,
-});
-*/
 
 
 module.exports = app;
