@@ -4,10 +4,28 @@ block content
 	.section
 		.container
 			.row
-				div(class='nine columns')
-					h1=title
-				div(class='three columns')
-					button#run='run'
+				div(class='twelve columns')
+					h1= title
+			.row
+				div(class='six columns')
+					label Pad name
+					input(type='text' id='padName' name='padName')
+				div(class='six columns')
+					button#create.button-primary.u-pull-right='create pad'
 			.row
 				div(class='twelve columns')
-					#epad
+					h4 List of pads
+			.row
+				div(class='twelve columns')
+					table(class='u-full-width')
+						thead
+							tr
+								th Pad ID
+								th Actions
+						tbody
+							each pad in pads.padIDs
+								tr
+									td= pad
+									td
+										a(id=pad class='button' href='/pad/' + pad)='join'
+										a(id=pad class='button button-danger' href='/pad/delete/' + pad)='delete'
