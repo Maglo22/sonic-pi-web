@@ -1,6 +1,25 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  .section
+    .container
+      .row
+        div(class='twelve columns')
+        a(class='button' href='/')='home'
+      .row
+        div(class='twelve columns')
+        h1 I didn't ask for this
+      .row
+        div(class='twelve columns')
+          table(class='u-full-width')
+            thead
+              tr
+                th Error Code
+                th Error message
+            tbody
+              tr
+                td= error.code
+                td= error.message
+      .row
+        div(class='twelve columns')
+        pre #{error.stack}
