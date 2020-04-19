@@ -2,9 +2,63 @@
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .section {
   padding: 8rem 0 7rem;
-  text-align: center;
+  /*text-align: center;*/
 }
 .section-heading,
 .section-description {
   margin-bottom: 1.2rem;
 }
+
+/* Table buttons
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+td button,
+td a{
+  margin-bottom: 0rem;
+  margin-right: 1rem;
+}
+
+/* Buttons
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.button.button-warning,
+  button.button-warning,
+  input[type="submit"].button-warning,
+  input[type="reset"].button-warning,
+  input[type="button"].button-warning {
+    color: #FFF;
+    background-color: #f09e33;
+    border-color: #f09e33; }
+  .button.button-warning:hover,
+  button.button-warning:hover,
+  input[type="submit"].button-warning:hover,
+  input[type="reset"].button-warning:hover,
+  input[type="button"].button-warning:hover,
+  .button.button-warning:focus,
+  button.button-warning:focus,
+  input[type="submit"].button-warning:focus,
+  input[type="reset"].button-warning:focus,
+  input[type="button"].button-warning:focus {
+    color: #FFF;
+    background-color: #d89031;
+    border-color: #d89031; }
+
+.button.button-danger,
+  button.button-danger,
+  input[type="submit"].button-danger,
+  input[type="reset"].button-danger,
+  input[type="button"].button-danger {
+    color: #FFF;
+    background-color: #f03f33;
+    border-color: #f03f33; }
+  .button.button-danger:hover,
+  button.button-danger:hover,
+  input[type="submit"].button-danger:hover,
+  input[type="reset"].button-danger:hover,
+  input[type="button"].button-danger:hover,
+  .button.button-danger:focus,
+  button.button-danger:focus,
+  input[type="submit"].button-danger:focus,
+  input[type="reset"].button-danger:focus,
+  input[type="button"].button-danger:focus {
+    color: #FFF;
+    background-color: #db392e;
+    border-color: #db392e; }
