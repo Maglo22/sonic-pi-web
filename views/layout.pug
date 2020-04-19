@@ -10,11 +10,12 @@ html
 		link(rel='stylesheet', href='/stylesheets/skeleton.css')
 		// css
 		link(rel='stylesheet', href='/stylesheets/styles.css')
-		// sweetalert
-		script(src='https://cdn.jsdelivr.net/npm/sweetalert2@9')
-		// js
-		script(src='/javascripts/plugins/jquery.min.js')
-		script(src='/javascripts/plugins/etherpad.js')
-		script(src='/javascripts/test.js')
+		block scripts
+			// js
+			script(src='/javascripts/plugins/jquery.min.js')
+			script(src='/javascripts/plugins/etherpad.js')
+			// notify.js
+			script(src='/javascripts/plugins/notify.min.js')
+			script(src='/javascripts/pads-index.js')
 	body
 		block content
