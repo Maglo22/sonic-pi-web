@@ -1,0 +1,20 @@
+extends layout
+
+block content
+	.section
+		.container
+			.row
+				div(class='twelve columns')
+					a(class='button' href='/')='home'
+			.row
+				div(class='nine columns')
+					h1= title
+					p(id='padID' hidden)= id
+				div(class='three columns')
+					button#run='run'
+			.row
+				div(class='twelve columns')
+					#epad
+
+block append scripts
+	script(src='/javascripts/test.js')
