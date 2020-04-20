@@ -2,8 +2,13 @@ $(document).ready(function() {
 	listPads();
 
 	$('#create').click(function() {
-		let padID = $('#newPadID').val();
-		createPad(padID);
+		if ($('#newPadID').val()) {
+			createPad($('#newPadID').val());
+		} else {
+			$('#newPadID').notify('The pad needs a name', 'warn');
+			$('#newPadID').focus();
+		}
+		
 	});
 
 	// delegate to the table as appended/re-appended elements lose the binding to OnClick
@@ -36,9 +41,10 @@ function listPads() {
 
 		$('#padList').append('</tbody>'); // close table body
 	})
-	/*.done(function() {
-		$.notify('Pad list retrieved', 'info');
-	})*/
+	.done(function() {
+		//$.notify('Pad list retrieved', 'info');
+		$('#padList').fadeIn('fast');
+	})
 	.fail(function(error) {
 		$.notify('Error getting the pad list: ' + error.responseJSON.message, 'error');
 	});
@@ -46,8 +52,11 @@ function listPads() {
 
 // update (redraw) table
 function updateTable() {
-	$("#padList tbody").empty();
-	listPads();
+	$("#padList").fadeOut('fast', function() {
+		$("#padList tbody").empty();
+		listPads();
+	});
+	
 }
 
 // create a new pad (groupless, for now)
@@ -58,6 +67,7 @@ function createPad(padID) {
 	.done(function() {
 		$.notify('Pad created', 'success');
 		updateTable();
+		$('#newPadID').val('');
 	})
 	.fail(function(error) {
 		$.notify('Error creating pad: ' + error.responseJSON.message, 'error');
