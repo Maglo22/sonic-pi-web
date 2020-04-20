@@ -9,7 +9,7 @@ block content
 			.row
 				div(class='six columns')
 					label Pad name
-					input(type='text' id='padName' name='padName')
+					input(type='text' id='newPadID' name='newPadID')
 				div(class='six columns')
 					button#create.button-primary.u-pull-right='create pad'
 			.row
@@ -17,15 +17,12 @@ block content
 					h4 List of pads
 			.row
 				div(class='twelve columns')
-					table(class='u-full-width')
+					table(class='u-full-width' id='padList')
 						thead
 							tr
 								th Pad ID
 								th Actions
-						tbody
-							each pad in pads.padIDs
-								tr
-									td= pad
-									td
-										a(id=pad class='button' href='/pad/' + pad)='join'
-										a(id=pad class='button button-danger' href='/pad/delete/' + pad)='delete'
+					
+
+block append scripts
+	script(src='/javascripts/pads-index.js')
