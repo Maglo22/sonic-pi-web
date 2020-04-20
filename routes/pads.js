@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 
 /* join a pad */
 router.get('/join/:id', function(req, res) {
-  res.render('pad', { title: 'Pad: ' + req.params.id, id: req.params.id });
+  res.render('pad', { title: '// ' + req.params.id, id: req.params.id });
 });
 
 /* create a pad */
