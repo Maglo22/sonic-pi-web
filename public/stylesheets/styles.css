@@ -1,3 +1,9 @@
+/* Major Mono Font
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.major {
+  font-family: 'Major Mono Display', monospace;
+}
+
 /* Sections
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .section {
