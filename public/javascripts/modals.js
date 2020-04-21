@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	// show
 	// delegate to the table as appended/re-appended elements lose the binding to OnClick
-	$('#padList').delegate('.modalOpen', 'click', function(){
+	$('#padList').delegate('.modalOpen', 'click', function() {
 		let id = $(this).attr('id'); // get id of button clicked
 		let split = id.split('.'); // split in substrings
 		let padID = split[0]; // first part is the pad id
