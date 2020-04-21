@@ -69,7 +69,83 @@ td a{
     background-color: #db392e;
     border-color: #db392e; }
 
+.button.button-transparent,
+  button.button-transparent,
+  input[type="submit"].button-transparent,
+  input[type="reset"].button-transparent,
+  input[type="button"].button-transparent {
+    font-family: 'Major Mono Display', monospace;
+    font-size: 50px;
+    font-weight: 3;
+    text-transform: lowercase;
+    padding: 30px 0;
+    border: 0;
+    color: #FFF;
+    background-color: rgba(0,0,0,0); }
+  .button.button-transparent:hover,
+  button.button-transparent:hover,
+  input[type="submit"].button-transparent:hover,
+  input[type="reset"].button-transparent:hover,
+  input[type="button"].button-transparent:hover,
+  .button.button-transparent:focus,
+  button.button-transparent:focus,
+  input[type="submit"].button-transparent:focus,
+  input[type="reset"].button-transparent:focus,
+  input[type="button"].button-transparent:focus {
+    color: rgba(255, 255, 255, 0.699);
+    background-color: rgba(0,0,0,0); }
 
+.button.button-primary-transparent,
+  button.button-prmiary-transparent,
+  input[type="submit"].button-primary-transparent,
+  input[type="reset"].button-primary-transparent,
+  input[type="button"].button-primary-transparent {
+    font-family: 'Major Mono Display', monospace;
+    font-size: 50px;
+    font-weight: 3;
+    text-transform: lowercase;
+    padding: 30px 0;
+    border: 0;
+    color: #FFF;
+    background-color: rgba(0,0,0,0); }
+  .button.button-primary-transparent:hover,
+  button.button-primary-transparent:hover,
+  input[type="submit"].button-primary-transparent:hover,
+  input[type="reset"].button-primary-transparent:hover,
+  input[type="button"].button-primary-transparent:hover,
+  .button.button-primary-transparent:focus,
+  button.button-primary-transparent:focus,
+  input[type="submit"].button-primary-transparent:focus,
+  input[type="reset"].button-primary-transparent:focus,
+  input[type="button"].button-primary-transparent:focus {
+    color: #0FA0CE;
+    background-color: rgba(0,0,0,0); }
+
+.button.button-danger-transparent,
+  button.button-danger-transparent,
+  input[type="submit"].button-danger-transparent,
+  input[type="reset"].button-danger-transparent,
+  input[type="button"].button-danger-transparent {
+    font-family: 'Major Mono Display', monospace;
+    font-size: 50px;
+    font-weight: 3;
+    text-transform: lowercase;
+    padding: 30px 0;
+    border: 0;
+    color: #FFF;
+    background-color: rgba(0,0,0,0); }
+.button.button-danger-transparent:hover,
+  button.button-danger-transparent:hover,
+  input[type="submit"].button-danger-transparent:hover,
+  input[type="reset"].button-danger-transparent:hover,
+  input[type="button"].button-danger-transparent:hover,
+  .button.button-danger-transparent:focus,
+  button.button-danger-transparent:focus,
+  input[type="submit"].button-danger-transparent:focus,
+  input[type="reset"].button-danger-transparent:focus,
+  input[type="button"].button-danger-transparent:focus {
+    color: rgb(226, 14, 14);
+    background-color: rgba(0,0,0,0); }
 
 
 /* Transparent input
