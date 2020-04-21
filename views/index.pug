@@ -7,14 +7,19 @@ block content
 				div(class='twelve columns')
 					h1.major= title
 			.row
+				div(class='twelve columns')
+					h5.major // new pad
+			.row
 				div(class='six columns')
 					label Pad name
 					input(type='text' id='newPadID' name='newPadID')
 				div(class='six columns')
 					button#create.button-primary.u-pull-right='create pad'
 			.row
+				button#modalTest='modal test'
+			.row
 				div(class='twelve columns')
-					h4.major list of pads
+					h5.major // pads
 			.row
 				div(class='twelve columns')
 					table(class='u-full-width' id='padList' style='display: none;')
@@ -23,6 +28,22 @@ block content
 								th Pad ID
 								th Actions
 					
+
+block modals
+	#modalJoin.modal
+		.modal-content
+			.modal-header
+				span.close &times;
+				h3.major Join pad
+			.modal-body
+				.row
+				div(class='twelve columns')
+					label Username
+					input(type='text' id='username' name='username')
+			.modal-footer
+				button#closeModal='close'
+				button#joinPad.button-primary.u-pull-right='join'
+
 
 block append scripts
 	script(src='/javascripts/pads-index.js')
