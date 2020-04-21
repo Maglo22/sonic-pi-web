@@ -40,8 +40,8 @@ block modals
 					label Username
 					input(class='transparent-input' type='text' id='username' name='username')
 			.modal-footer
-				button.button-close='close'
-				a#joinPad.button.button-primary.u-pull-right='join'
+				button.button.button-transparent.button-close='close'
+				a#joinPad.button.button-primary-transparent.u-pull-right='join'
 
 	// delete a pad
 	#modalDelete.modal
@@ -55,8 +55,8 @@ block modals
 					h4#deleteText.major Are you sure you want to delete the pad?
 					p(id='deleteID' hidden)
 			.modal-footer
-				button.button-close='close'
-				button#deletePad.button.button-danger.u-pull-right='delete'
+				button.button.button-transparent.button-close='close'
+				button#deletePad.button.button-danger-transparent.u-pull-right='delete'
 
 
 block append scripts
