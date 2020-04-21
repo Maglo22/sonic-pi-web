@@ -1,21 +1,48 @@
 $(document).ready(function() {
 	// show
-	$('#modalTest').click(function() {
-		$('#modalJoin').fadeToggle('fast');
+	// delegate to the table as appended/re-appended elements lose the binding to OnClick
+	$('#padList').delegate('.modalOpen', 'click', function(){
+		let id = $(this).attr('id'); // get id of button clicked
+		let split = id.split('.'); // split in substrings
+		let padID = split[0]; // first part is the pad id
+		let action = split[1]; // second part is the action to do with the pad
+
+		switch (action) {
+			case 'join': {
+				$('#joinPad').attr('href', '/pads/join/' + padID);
+				$('#modalJoin').fadeToggle('fast');
+				break;
+			}
+			case 'delete': {
+				$('#deleteID').text(padID);
+				$('#deleteText').text('Are you sure you want to delete the pad ' + padID + '?');
+				$('#modalDelete').fadeToggle('fast');
+				break;
+			}
+		}
 	});
 
 	// hide
 	$('.close').click(function() {
-		$('#modalJoin').fadeToggle('fast');
+		let id = $(this).parents('.modal').attr('id'); // get id of modal that is open
+		$('#' + id).fadeToggle('fast');
 	});
-	$('#closeModal').click(function() {
-		$('#modalJoin').fadeToggle('fast');
+	$('.button-close').click(function() {
+		let id = $(this).parents('.modal').attr('id');
+		$('#' + id).fadeToggle('fast');
 	});
 });
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-  if (event.target == document.getElementById('modalJoin')) {
-    $('#modalJoin').fadeToggle('fast');
-  }
+	switch (event.target) {
+		case document.getElementById('modalJoin') : {
+			$('#modalJoin').fadeToggle('fast');
+			break;
+		}
+		case document.getElementById('modalDelete'): {
+			$('#modalDelete').fadeToggle('fast');
+			break;
+		}
+	}
 }
