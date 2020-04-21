@@ -16,8 +16,6 @@ block content
 				div(class='six columns')
 					button#create.button-primary.u-pull-right='create pad'
 			.row
-				button#modalTest='modal test'
-			.row
 				div(class='twelve columns')
 					h5.major // pads
 			.row
@@ -30,19 +28,35 @@ block content
 					
 
 block modals
+	// join a pad
 	#modalJoin.modal
 		.modal-content
 			.modal-header
 				span.close &times;
-				h3.major Join pad
+				h1.major // Join pad
 			.modal-body
 				.row
 				div(class='twelve columns')
 					label Username
-					input(type='text' id='username' name='username')
+					input(class='transparent-input' type='text' id='username' name='username')
 			.modal-footer
-				button#closeModal='close'
-				button#joinPad.button-primary.u-pull-right='join'
+				button.button-close='close'
+				a#joinPad.button.button-primary.u-pull-right='join'
+
+	// delete a pad
+	#modalDelete.modal
+		.modal-content
+			.modal-header
+				span.close &times
+				h1.major // Delete pad
+			.modal-body
+				.row
+				div(class='twelve columns')
+					h4#deleteText.major Are you sure you want to delete the pad?
+					p(id='deleteID' hidden)
+			.modal-footer
+				button.button-close='close'
+				button#deletePad.button.button-danger.u-pull-right='delete'
 
 
 block append scripts
