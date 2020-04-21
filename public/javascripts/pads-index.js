@@ -10,13 +10,10 @@ $(document).ready(function() {
 		}
 	});
 
-	// delegate to the table as appended/re-appended elements lose the binding to OnClick
-	$('#padList').delegate('.delete', "click", function(){
-		let id = $(this).attr('id'); // get id of button clicked
-		let split = id.split('.'); // split in substrings [format -> id.delete]
-		let padID = split[0]; // first part is the pad id
-		
+	$('#deletePad').click(function() {
+		let padID = $('#deleteID').text();
 		deletePad(padID);
+		$('#modalDelete').fadeToggle('fast'); // close modal
 	});
 });
 
@@ -30,8 +27,8 @@ function listPads() {
 		$('#padList').append(tableHTML);
 
 		pads.forEach(function(pad) {
-			let btnJoin = '<a class="button" id="' + pad + '.join" href="/pads/join/' + pad + '">join</a>';
-			let btnDelete = '<button class="button button-danger delete" id="' + pad + '.delete">delete</button>';
+			let btnJoin = '<button class="button modalOpen" id="' + pad + '.join">join</button>';
+			let btnDelete = '<button class="button button-danger modalOpen" id="' + pad + '.delete">delete</button>';
 			let row = '<tr><td>' + pad + '</td><td>' + btnJoin + btnDelete + '</td></tr>';
 			
 			$('#padList').append(row);
