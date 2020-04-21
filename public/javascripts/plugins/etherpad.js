@@ -4,7 +4,7 @@
       var settings = {
         'host'              : 'http://localhost:9001',
         'baseUrl'           : '/p/',
-        'showControls'      : false,
+        'showControls'      : true,
         'showChat'          : false,
         'showLineNumbers'   : true,
         'userName'          : 'unnamed',
