@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	listPads();
+	listPads(); // list all pads in db
 
 	$('#create').click(function() {
 		if ($('#newPadID').val()) {
@@ -8,7 +8,6 @@ $(document).ready(function() {
 			$('#newPadID').notify('The pad needs a name', 'warn');
 			$('#newPadID').focus();
 		}
-		
 	});
 
 	// delegate to the table as appended/re-appended elements lose the binding to OnClick
@@ -19,7 +18,6 @@ $(document).ready(function() {
 		
 		deletePad(padID);
 	});
-		
 });
 
 // list all ether pads
@@ -51,13 +49,10 @@ function listPads() {
 }
 
 // update (redraw) table
-function updateTable() {
-	$("#padList").fadeOut('fast', function() {
-		$("#padList tbody").empty();
-		listPads();
-	});
-	
-}
+$('#padList').fadeOut('fast', function() {
+	$('#padList tbody').empty();
+	listPads();
+});
 
 // create a new pad (groupless, for now)
 function createPad(padID) {
