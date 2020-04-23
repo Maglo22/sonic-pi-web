@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var etherpad_api = require('../etherpad-api');
+var etherpad_api = require('../modules/etherpad-api');
 
 /* GET pads. */
 router.get('/', function(req, res, next) {
