@@ -5,7 +5,11 @@ $(document).ready(function() {
 		if ($('#newPadID').val()) {
 			createPad($('#newPadID').val());
 		} else {
-			$('#newPadID').notify('The pad needs a name', 'warn');
+			$('#newPadID').notify('// The pad needs a name', {
+				position: 'right',
+				style: 'transparent',
+				className: 'warning' 
+			});
 			$('#newPadID').focus();
 		}
 	});
@@ -15,6 +19,7 @@ $(document).ready(function() {
 		deletePad(padID);
 		$('#modalDelete').fadeToggle('fast'); // close modal
 	});
+
 });
 
 // list all ether pads
@@ -41,15 +46,20 @@ function listPads() {
 		$('#padList').fadeIn('fast');
 	})
 	.fail(function(error) {
-		$.notify('Error getting the pad list: ' + error.responseJSON.message, 'error');
+		$.notify('// Error getting the pad list: ' + error.responseJSON.message, {
+			style: 'transparent',
+			className: 'error' 
+		});
 	});
 }
 
 // update (redraw) table
-$('#padList').fadeOut('fast', function() {
-	$('#padList tbody').empty();
-	listPads();
-});
+function updateTable() {
+	$('#padList').fadeOut('fast', function() {
+		$('#padList tbody').empty();
+		listPads();
+	});
+}
 
 // create a new pad (groupless, for now)
 function createPad(padID) {
@@ -57,12 +67,18 @@ function createPad(padID) {
 		//console.log(res);
 	})
 	.done(function() {
-		$.notify('Pad created', 'success');
+		$.notify('// Pad created', {
+			style: 'transparent',
+			className: 'success' 
+		});
 		updateTable();
 		$('#newPadID').val('');
 	})
 	.fail(function(error) {
-		$.notify('Error creating pad: ' + error.responseJSON.message, 'error');
+		$.notify('// Error creating pad: ' + error.responseJSON.message, {
+			style: 'transparent',
+			className: 'error' 
+		});
 	});
 }
 
@@ -72,10 +88,16 @@ function deletePad(padID) {
 		//console.log(res);
 	})
 	.done(function() {
-		$.notify('Pad deleted', 'success');
+		$.notify('// Pad deleted', {
+			style: 'transparent',
+			className: 'success' 
+		});
 		updateTable();
 	})
 	.fail(function(error) {
-		$.notify('Error deleting pad: ' + error.responseJSON.message, 'error');
+		$.notify('// Error deleting pad: ' + error.responseJSON.message, {
+			style: 'transparent',
+			className: 'error' 
+		});
 	});
 }
