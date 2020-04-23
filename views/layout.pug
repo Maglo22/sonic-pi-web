@@ -3,22 +3,34 @@ html
 	head
 		title= title
 		meta(name='viewport' content='width=device-width, initial-scale=1')
-		// fonts
+		// -- fonts -- //
 		link(rel='stylesheet' href='//fonts.googleapis.com/css?family=Raleway:400,300,600' type='text/css')
 		link(rel='stylesheet' href='//fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap' type='text/css')
-		// skeleton
+		// -- skeleton -- //
 		link(rel='stylesheet', href='/stylesheets/normalize.css')
 		link(rel='stylesheet', href='/stylesheets/skeleton.css')
-		// css
+		// -- css -- //
 		link(rel='stylesheet', href='/stylesheets/styles.css')
 		block scripts
-			// js
+			// -- js -- //
+			// jquery
 			script(src='/javascripts/plugins/jquery.min.js')
+			// socket io client
+			script(src='/socket.io/socket.io.js')
+			// socket io logic
+			script(src='/javascripts/socket-io.js')
+			// etherpad-lite
 			script(src='/javascripts/plugins/etherpad.js')
+			// modals
 			script(src='/javascripts/modals.js')
 			// notify.js
 			script(src='/javascripts/plugins/notify.min.js')
+				
 	body
+		#navbar.navbar
+			a(href='/') // home
+			a(href='https://github.com/Maglo22/sonic-pi-web' target='_blank') // github
+
 		block content
 
 		block modals
