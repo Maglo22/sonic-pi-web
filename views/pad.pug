@@ -9,11 +9,11 @@ block content
 					p(id='padID' hidden)= id
 			.row
 				div(class='twelve columns')
-					button#stop='stop'
-					button#run='run'
+					button#run.u-pull-right='run'
+					button#stop.u-pull-right='stop'
 			.row
 				div(class='twelve columns')
 					#epad
 
 block append scripts
-	script(src='/javascripts/pad.js')
+	script(src='/javascripts/pad.js' defer)

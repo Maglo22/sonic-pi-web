@@ -14,18 +14,16 @@ html
 		block scripts
 			// -- js -- //
 			// jquery
-			script(src='/javascripts/plugins/jquery.min.js')
+			script(src='/javascripts/plugins/jquery.min.js' defer)
 			// socket io client
-			script(src='/socket.io/socket.io.js')
-			// socket io logic
-			script(src='/javascripts/socket-io.js')
+			script(src='/socket.io/socket.io.js' async)
 			// etherpad-lite
-			script(src='/javascripts/plugins/etherpad.js')
+			script(src='/javascripts/plugins/etherpad.js' defer)
 			// modals
-			script(src='/javascripts/modals.js')
+			script(src='/javascripts/modals.js' async)
 			// notify.js
-			script(src='/javascripts/plugins/notify.min.js')
-			script(src='/javascripts/plugins/notify-styles.js')
+			script(src='/javascripts/plugins/notify.min.js' defer)
+			script(src='/javascripts/plugins/notify-styles.js' defer)
 				
 	body
 		#navbar.navbar
