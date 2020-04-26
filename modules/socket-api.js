@@ -6,8 +6,10 @@ var fs = require('fs'); // file system
 
 const { exec } = require("child_process");
 
+var path = '/home/br1/test-files/'; // TODO: make it relative
+
 io.on('connection', (socket) => {
-  //console.log('a user connected');
+  // play content on pad
   socket.on('run pad', (padID) => {
     var args = {
       padID: padID
@@ -16,17 +18,40 @@ io.on('connection', (socket) => {
       if (error) {
         console.error(error);
       } else {
-        fs.writeFile('/home/br1/test-files/test.txt', data.text, function (err) { // TODO: change to relative path
-          if (err) return console.log(err);
-          console.log('text > test.txt');
-        });
+        let fileName = padID + '.rb';
+        let pathToFile = path + fileName;
+        
+        saveToFileAndRun(pathToFile, data.text);
       }
     });
   });
 
+  // stop playing pad
+  socket.on('stop pad', (padID) => {
+    runCommand('sonic-pi-tool stop');
+  });
+
 });
 
-function cmd(command) {
+// save text of the pad to file for sonic-pi-tool to run
+function saveToFileAndRun(pathToFile, text) {
+  fs.open(pathToFile, 'w', (err, fd) => {
+    if (err) throw err;
+    fs.write(fd, text, (err, written, string) => {
+      if (err) throw err;
+      console.log('written ' + written + ' bytes to ' + pathToFile);
+
+      runCommand('sonic-pi-tool eval-file ' + pathToFile); // run the file with sonic-pi-tool
+  
+      // close file descriptor
+      fs.close(fd, (err) => {
+        if (err) throw err;
+      });
+    });
+  });
+}
+
+function runCommand(command) {
   exec(command, (error, stdout, stderr) => {
     if (error) {
         console.log(`error: ${error.message}`);
@@ -36,7 +61,7 @@ function cmd(command) {
         console.log(`stderr: ${stderr}`);
         return;
     }
-    console.log(`success/nstdout: ${stdout}`);
+    console.log('command executed: ' + command);
   });
 }
 
