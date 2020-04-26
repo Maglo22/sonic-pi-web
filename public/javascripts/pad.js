@@ -22,5 +22,6 @@ $(document).ready(function() {
             style: 'transparent',
             className: 'success' 
         });
+        socket.emit('stop pad', $('#padID').text());
     });
 });
