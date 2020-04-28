@@ -1,12 +1,29 @@
-# Sonic-Pi Web
-## Technologies
-### Back
-- Node JS
-- Socket.io
-- Etherpad lite
-- Sonic-Pi
-- Sonic-Pi-tool
+# Sonic-Pi-Web
 
-### Front
-- Skeleton
-- jQuery
+Sonic-Pi-Web is a collaborative environment for Sonic Pi. It allows multiple users edit the same file in real time.
+
+# Technologies
+
+The app integrates different technologies to achieve the collaboration of multiple users in real time, editing the same document of Sonic Pi.
+
+## Back-end
+### [Node JS](https://nodejs.org/en/)
+The core app, the logic, is built in Node JS, using the [express](https://expressjs.com/) web framework.
+
+### [Socket.io](https://socket.io/)
+Socket.io is used to fire and listen for some events, like playing or stopping the current file being edited, and making the server respond acordingly.
+
+### [Etherpad-lite](https://github.com/ether/etherpad-lite)
+Etherpad-lite is the service that allows multiple users edit the same file in real time. Its pads are embbeded in the web app, where users write the code to be interpreted.
+
+### [Sonic-Pi](https://sonic-pi.net/)
+Sonic Pi needs to be there so the files are ran through its server; its being used as the interpreter.
+
+### [Sonic-Pi-tool](https://github.com/lpil/sonic-pi-tool)
+Allows controlling Sonic Pi from the command line. Using the commands available is how the code in the pads from the app are passed to Sonic Pi to interpret.
+
+## Front-end
+### [Skeleton](http://getskeleton.com/)
+Skeleton provides a CSS bolierplate that is expanded a bit for the UI of the app.
+### [jQuery](https://jquery.com/)
+Used to embed the pads and interact with the Socket.io client in the pages of the app.
