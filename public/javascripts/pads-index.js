@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	var socket = io();
+
 	listPads(); // list all pads in db
 
 	$('#create').click(function() {
@@ -17,7 +19,30 @@ $(document).ready(function() {
 	$('#deletePad').click(function() {
 		let padID = $('#deleteID').text();
 		deletePad(padID);
-		$('#modalDelete').fadeToggle('fast'); // close modal
+		$('#modalDelete').fadeToggle('fast'); // toggle modal
+	});
+
+	$('#joinPad').click(function() {
+		let username = $('#username').val();
+		let usercolor = $('#usercolor').val();
+		
+		if (username && usercolor) {
+			if (usercolor == 'FFFFFF') {
+				$('#usercolor').notify('// White will make your text appear invisible', {
+				position: 'bottom',
+				style: 'transparent',
+				className: 'warning' 
+			});
+			} else {
+				let padID = $('#joinPad').attr('padID');
+				window.location.href = '/pads/' + padID + '.' + username + '.' + usercolor;
+			}
+		} else {
+			$.notify('// You need an username and a usercolor', {
+				style: 'transparent',
+				className: 'warning' 
+			});
+		}
 	});
 
 });
