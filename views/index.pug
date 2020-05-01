@@ -33,15 +33,18 @@ block modals
 		.modal-content
 			.modal-header
 				span.close &times;
-				h1.major // Join pad
+				h1#joinTitle.major // Join pad
 			.modal-body
 				.row
-				div(class='twelve columns')
-					label Username
-					input(class='transparent-input' type='text' id='username' name='username')
+					div(class='four columns')
+						label Username
+						input(class='transparent-input' type='text' id='username' name='username')
+					div(class='four columns')
+						label Color
+						input(class='jscolor' type='text' id='usercolor' name='usercolor')
 			.modal-footer
 				button.button.button-transparent.button-close='close'
-				a#joinPad.button.button-transparent.button-primary-transparent.u-pull-right='join'
+				button#joinPad.button.button-transparent.button-primary-transparent.u-pull-right='join'
 
 	// delete a pad
 	#modalDelete.modal
@@ -61,3 +64,4 @@ block modals
 
 block append scripts
 	script(src='/javascripts/pads-index.js' defer)
+	script(src='/javascripts/plugins/jscolor.js' async)
