@@ -9,7 +9,8 @@ $(document).ready(function() {
 
 		switch (action) {
 			case 'join': {
-				$('#joinPad').attr('href', '/pads/join/' + padID);
+				$('#joinTitle').text('// Join pad ' + '[' + padID + ']');
+				$('#joinPad').attr('padID', padID);
 				$('#modalJoin').fadeToggle('fast');
 				break;
 			}
