@@ -13,9 +13,15 @@ router.get('/', function(req, res, next) {
 	});
 });
 
+
 /* join a pad */
-router.get('/join/:id', function(req, res) {
-  res.render('pad', { title: '// ' + req.params.id, id: req.params.id });
+router.get('/:id.:username.:usercolor', function(req, res) {
+  res.render('pad', {
+			title: '// ' + req.params.id,
+			id: req.params.id,
+			username: req.params.username,
+			usercolor: req.params.usercolor
+		});
 });
 
 /* create a pad */
