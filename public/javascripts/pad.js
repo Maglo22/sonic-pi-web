@@ -2,26 +2,29 @@ $(document).ready(function() {
     var socket = io();
 
     var padID = $('#padID').text();
-    $('#epad').pad({'padId': padID, 'userName': 'uname'});
+    var username = $('#username').text();
+    var usercolor = '#' + $('#usercolor').text();
 
-    $.notify('// Welcome to: ' + padID, {
-      	style: 'transparent',
-      	className: 'success' 
-    });
+    // join pad with especified username and usercolor
+    $('#epad').pad({'padId': padID, 'userName': username, 'userColor': usercolor});
+
+    socket.emit('notify', '// ' + username + ' joined the pad', 'transparent', 'success');
 
     $('#run').click(function() {
-        $.notify('// Running...', {
-            style: 'transparent',
-            className: 'success' 
-        });
+        socket.emit('notify', '// Running...', 'transparent', 'success');
         socket.emit('run pad', $('#padID').text());
     });
 
     $('#stop').click(function() {
-        $.notify('// Stopping...', {
-            style: 'transparent',
-            className: 'success' 
-        });
+        socket.emit('notify', '// Stopping...', 'transparent', 'success');
         socket.emit('stop pad', $('#padID').text());
     });
+
+    socket.on('notify', function(msg, style, classname){
+        $.notify(msg, {
+            style: style,
+            className: classname
+        });
+    });
+
 });
