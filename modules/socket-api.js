@@ -31,6 +31,11 @@ io.on('connection', (socket) => {
     runCommand('sonic-pi-tool stop');
   });
 
+  // notification for users in pad
+  socket.on('notify', (msg, style, classname) => {
+    io.emit('notify', msg, style, classname);
+  });
+
 });
 
 // save text of the pad to file for sonic-pi-tool to run
