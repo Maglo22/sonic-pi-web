@@ -17,3 +17,6 @@ package-lock.json
 
 # etherpad-api file
 etherpad-api.js
+
+# pad files (songs)
+pad_files
