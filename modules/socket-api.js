@@ -2,6 +2,8 @@ var socket_io = require('socket.io');
 var io = socket_io();
 var socket_api = {};
 
+var ss = require('socket.io-stream');
+
 var etherpad_api = require('../modules/etherpad-api');
 var path = require('path');
 var fs = require('fs'); // file system
@@ -36,6 +38,14 @@ io.on('connection', (socket) => {
 
   // notification for users in pad
   socket.on('notify', (msg, style, classname) => { io.emit('notify', msg, style, classname); });
+
+  // audio stream
+  socket.on('client-stream-request', function (data) {
+    var stream = ss.createStream();
+    var filename = __dirname + '/downloads/';
+    ss(socket).emit('audio-stream', stream, { name: filename });
+    fs.createReadStream(filename).pipe(stream);
+  });
 
 });
 
