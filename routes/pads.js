@@ -3,7 +3,7 @@ var router = express.Router();
 var etherpad_api = require('../modules/etherpad-api');
 
 /* GET pads. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
 	etherpad_api.listAllPads(function(error, data) {
 		if(error) {
 			res.status(500).send(error);
