@@ -1,22 +1,29 @@
+// spcket.io
 var socket_io = require('socket.io');
 var io = socket_io();
 var socket_api = {};
-
-var ss = require('socket.io-stream');
-
+// etherpad-lite
 var etherpad_api = require('../modules/etherpad-api');
+// system
 var path = require('path');
 var fs = require('fs'); // file system
+const { exec } = require('child_process'); // commands
+// streams
+const { Readable } = require('stream'); // node streams
+const { RtAudio, RtAudioFormat } = require('audify'); // audify streams
+var ss = require('socket.io-stream'); // socket.io-stream
 
-const { exec } = require('child_process');
 
 var dir = path.join(__dirname, '..', 'pad_files/');
-
+const rtAudio = new RtAudio();
+const inStream = new Readable({
+  read() {}
+});
 
 io.on('connection', (socket) => {
   // play content on pad
   socket.on('run pad', (padID) => {
-    var args = { padID: padID }
+    let args = { padID: padID }
 
     etherpad_api.getText(args, (error, data) => {
       if (error) {
@@ -34,17 +41,53 @@ io.on('connection', (socket) => {
   socket.on('stop pad', (padID) => {
     console.log('stopping pad: // ' + padID);
     runCommand('sonic-pi-tool stop');
+    
+    if (rtAudio.isStreamOpen()) {
+      if (rtAudio.isStreamRunning()) {
+        rtAudio.stop();
+      }
+      inStream.pause(); // tell the readable stream there is nothing more to read
+      rtAudio.closeStream();
+    }
   });
 
   // notification for users in pad
   socket.on('notify', (msg, style, classname) => { io.emit('notify', msg, style, classname); });
 
   // audio stream
-  socket.on('client-stream-request', function (data) {
-    var stream = ss.createStream();
-    var filename = __dirname + '/downloads/';
-    ss(socket).emit('audio-stream', stream, { name: filename });
-    fs.createReadStream(filename).pipe(stream);
+  socket.on('client-stream-request', (padID) => {
+    console.log('streaming audio from: // ' + padID);
+
+    var stream = ss.createStream(); // duplex stream
+    
+    // audify stream (capture audio from input device)
+    if (!rtAudio.isStreamOpen()) {
+      rtAudio.openStream(
+        null, // no output device
+        {
+          deviceId: rtAudio.getDefaultInputDevice(),
+          nChannels: 1,
+          firstChannel: 0
+        },
+        RtAudioFormat.RTAUDIO_FLOAT32,
+        44100,
+        1024,
+        'Sonic-Pi',
+        pcm => inStream.push(pcm) // push pcm data from input device to readable stream
+      );
+    }
+
+    if (!rtAudio.isStreamRunning()) {
+      rtAudio.start();
+    }
+
+    ss(socket).emit('audio-stream', stream);
+
+    if (inStream.isPaused()) {
+      inStream.resume();
+    }
+
+    inStream.pipe(stream); // pipe readable stream to duplex stream
   });
 
 });
@@ -86,6 +129,7 @@ function saveFileAndRun(pathToFile, text) {
   });
 }
 
+// run a terminal command
 function runCommand(command) {
   exec(command, (error, stdout, stderr) => {
     if (error) {
