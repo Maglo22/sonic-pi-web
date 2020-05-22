@@ -6,8 +6,8 @@ chai.use(chaiHttp);
 chai.should();
 
 // etherpad-api url & key
-const etherpad_api_url = 'http://localhost:9001/api/1.2.12';
-const apikey = '?apikey=cf9d1625ffd031705fe18419e3e3b911b9643ede36955459dc6bf7e295071d8a';
+const etherpad_api_url = 'http://localhost:9002/api/1.2.12';
+const apikey = '?apikey=bf49084cb557392feb24e5c86535e43c7f72078b369400620e65e056198b0b4c';
 
 describe('test etherpad api connection',() => {
   it('lists all pads', (done) => {
