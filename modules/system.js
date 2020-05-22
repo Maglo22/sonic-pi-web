@@ -45,9 +45,9 @@ function saveFileAndRun(pathToFile, text) {
 
 // run a terminal command
 function runCommand(command) {
-  exec(command, (error, stdout, stderr) => {
-    if (error) {
-        console.log(`error: ${error.message}`);
+  exec(command, (err, stdout, stderr) => {
+    if (err) {
+        console.log(`error: ${err.message}`);
         return;
     }
     if (stderr) {
