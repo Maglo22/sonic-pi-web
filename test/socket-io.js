@@ -2,8 +2,6 @@ const chai = require('chai');
 const io = require('socket.io');
 const io_client = require('socket.io-client');
 
-// configure chai
-chai.should();
 
 // configure socket
 const socketURL = 'http://0.0.0.0:5000';
@@ -26,10 +24,34 @@ describe('Socket-Server', () => {
     client.close();
   });
 
-
   it('allows connection between socket server and client.', (done) => {
-    client.on('connect', (data) => {
+    client.on('connect', () => {
       done();
     });
   });
+
+  it('emits message from server to client', (done) => {
+    server.on('connection', (socket) => {
+      socket.emit('notify', 'notification');
+    });
+
+    client.on('notify', (data) => {
+      chai.assert.equal(data, 'notification');
+      done();
+    });
+  });
+
+  it('emits message from client to server', (done) => {
+    client.on('connect', () => {
+      client.emit('notify', 'notification');
+    });
+
+    server.on('connection', (socket) => {
+      socket.on('notify', (data) => {
+        chai.assert.equal(data, 'notification');
+        done();
+      });
+    });
+  });
+
 });
