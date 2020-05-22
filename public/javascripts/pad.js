@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(() => {
     var socket = io();
 
     var padID = $('#padID').text();
@@ -10,21 +10,23 @@ $(document).ready(function() {
 
     socket.emit('notify', '// ' + username + ' joined the pad', 'transparent', 'success');
 
-    $('#run').click(function() {
+    $('#run').click(() => {
         socket.emit('notify', '// Running...', 'transparent', 'success');
         socket.emit('run pad', $('#padID').text());
     });
 
-    $('#stop').click(function() {
+    $('#stop').click(() => {
         socket.emit('notify', '// Stopping...', 'transparent', 'success');
         socket.emit('stop pad', $('#padID').text());
     });
 
-    socket.on('notify', function(msg, style, classname){
+    socket.on('notify', (msg, style, classname) => {
         $.notify(msg, {
             style: style,
             className: classname
         });
     });
-
 });
+
+
+
