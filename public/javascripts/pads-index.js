@@ -7,7 +7,7 @@ $(document).ready(function() {
 		if ($('#newPadID').val()) {
 			createPad($('#newPadID').val());
 		} else {
-			$('#newPadID').notify('// The pad needs a name', {
+			$('#newPadID').notify('// the pad needs a name', {
 				position: 'right',
 				style: 'transparent',
 				className: 'warning' 
@@ -71,7 +71,7 @@ function listPads() {
 		$('#padList').fadeIn('fast');
 	})
 	.fail(function(error) {
-		$.notify('// Error getting the pad list: ' + error.responseJSON.message, {
+		$.notify('// error getting the pad list: ' + error.responseJSON.message, {
 			style: 'transparent',
 			className: 'error' 
 		});
@@ -92,7 +92,7 @@ function createPad(padID) {
 		//console.log(res);
 	})
 	.done(function() {
-		$.notify('// Pad created', {
+		$.notify('// pad created', {
 			style: 'transparent',
 			className: 'success' 
 		});
@@ -100,7 +100,7 @@ function createPad(padID) {
 		$('#newPadID').val('');
 	})
 	.fail(function(error) {
-		$.notify('// Error creating pad: ' + error.responseJSON.message, {
+		$.notify('// error creating pad: ' + error.responseJSON.message, {
 			style: 'transparent',
 			className: 'error' 
 		});
@@ -120,7 +120,7 @@ function deletePad(padID) {
 		updateTable();
 	})
 	.fail(function(error) {
-		$.notify('// Error deleting pad: ' + error.responseJSON.message, {
+		$.notify('// error deleting pad: ' + error.responseJSON.message, {
 			style: 'transparent',
 			className: 'error' 
 		});
