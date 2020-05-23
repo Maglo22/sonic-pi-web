@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha"
+    "test": "mocha -S"
   },
   "dependencies": {
     "audify": "^1.5.2",
