@@ -14,4 +14,5 @@ var etherpadT = api.connect({
     port: 9002,
 });
 
+// change to ehterpadT before running tests
 module.exports = etherpad;
