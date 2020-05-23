@@ -1,3 +1,8 @@
+/*
+  Tests for Etherpad-lite service.
+  If you have an instance for testing, make sure the url and apikey
+  are the corresponding ones, and that its running before executing the tests.
+*/
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 

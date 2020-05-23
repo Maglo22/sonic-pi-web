@@ -1,3 +1,9 @@
+/*
+Tests for the app routes.
+This will test if the etherpad-lite api client is working in the app.
+Don't forget to change the exported var in ehterpad-api.js if you have another
+etherpad instance for testing.
+*/
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const app = require('../app');
@@ -6,25 +12,11 @@ const app = require('../app');
 chai.use(chaiHttp);
 chai.should();
 
-// test index routes
-describe('index routes', () => {
-  describe('GET', () => {
-    it('should get app index', (done) => {
-      chai.request(app)
-          .get('/')
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.a('object');
-            done();
-          });
-    });
-  });
-});
 
-// test pads routes
-describe('pads routes', () => {
-  describe('GET', () => {
-    it('should get pads index', (done) => {
+describe('test express app routes', () => {
+  // pads
+  describe('pads routes', () => {
+    it('gets pads index', (done) => {
       chai.request(app)
           .get('/pads')
           .end((err, res) => {
@@ -34,7 +26,7 @@ describe('pads routes', () => {
           });
     });
 
-    it('should create a new pad', (done) => {
+    it('creates a new pad', (done) => {
       const id = 'pad-test';
       chai.request(app)
           .get(`/pads/new/${id}`)
@@ -45,7 +37,7 @@ describe('pads routes', () => {
           });
     });
 
-    it('should join the pad', (done) => {
+    it('joins the pad', (done) => {
       const id = 'pad-test';
       const user = 'username';
       const color = '8AF1FF'
@@ -58,7 +50,7 @@ describe('pads routes', () => {
           });
     });
 
-    it('should delete a pad', (done) => {
+    it('deletes the pad', (done) => {
       const id = 'pad-test';
       chai.request(app)
           .get(`/pads/delete/${id}`)
@@ -68,6 +60,20 @@ describe('pads routes', () => {
             done();
           });
     });
-
   });
+
+  // index
+  describe('index routes', () => {
+    it('gets app index', (done) => {
+      chai.request(app)
+          .get('/')
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            done();
+          });
+    });
+  });
+
 });
+

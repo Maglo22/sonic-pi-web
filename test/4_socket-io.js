@@ -1,7 +1,9 @@
+/*
+Tests for Socket.io.
+*/
 const chai = require('chai');
 const io = require('socket.io');
 const io_client = require('socket.io-client');
-
 
 // configure socket
 const socketURL = 'http://0.0.0.0:5000';
@@ -10,7 +12,7 @@ const options = {
   'force new connection': true
 };
 
-describe('Socket-Server', () => {
+describe('test socket.io', () => {
   let server;
   let client;
 
@@ -24,7 +26,7 @@ describe('Socket-Server', () => {
     client.close();
   });
 
-  it('allows connection between socket server and client.', (done) => {
+  it('connects socket.io server and client.', (done) => {
     client.on('connect', () => {
       done();
     });
