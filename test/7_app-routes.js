@@ -1,8 +1,8 @@
 /*
-Tests for the app routes.
-This will test if the etherpad-lite api client is working in the app.
-Don't forget to change the exported var in ehterpad-api.js if you have another
-etherpad instance for testing.
+  Tests for the app routes.
+  This will test if the etherpad-lite api client is working in the app.
+  Don't forget to change the exported var in ehterpad-api.js if you have another
+  etherpad instance for testing.
 */
 const chai = require('chai');
 const chaiHttp = require('chai-http');
