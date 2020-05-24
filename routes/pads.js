@@ -4,9 +4,9 @@ var etherpad_api = require('../modules/etherpad-api');
 
 /* GET pads. */
 router.get('/', function(req, res) {
-	etherpad_api.listAllPads(function(error, data) {
-		if(error) {
-			res.status(500).send(error);
+	etherpad_api.listAllPads((err, data) => {
+		if(err) {
+			res.status(500).send(err);
 		} else {
 			res.status(200).send(data);
 		}
@@ -15,7 +15,7 @@ router.get('/', function(req, res) {
 
 
 /* join a pad */
-router.get('/:id.:username.:usercolor', function(req, res) {
+router.get('/:id.:username.:usercolor', (req, res) => {
   res.render('pad', {
 			title: '// ' + req.params.id,
 			id: req.params.id,
@@ -25,13 +25,13 @@ router.get('/:id.:username.:usercolor', function(req, res) {
 });
 
 /* create a pad */
-router.get('/new/:id', function(req, res) {
-	var args = {
+router.get('/new/:id', (req, res) => {
+	let args = {
 		padID: req.params.id
 	}
-	etherpad_api.createPad(args, (error, data) => {
-		if (error) {
-			res.status(500).send(error);
+	etherpad_api.createPad(args, (err, data) => {
+		if (err) {
+			res.status(500).send(err);
 		} else {
 			res.status(200).send(data);
 		}
@@ -39,13 +39,13 @@ router.get('/new/:id', function(req, res) {
 });
 
 /* delete a pad */
-router.get('/delete/:id', function(req, res) {
-	var args = {
+router.get('/delete/:id', (req, res) => {
+	let args = {
 		padID: req.params.id
 	}
-  etherpad_api.deletePad(args, (error, data) => {
-    if (error) {
-      res.status(500).send(error);
+  etherpad_api.deletePad(args, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
     } else {
       res.status(200).send(data);
     }
