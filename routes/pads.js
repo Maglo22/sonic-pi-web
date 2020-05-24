@@ -1,3 +1,6 @@
+/*
+	Routes for etherpad-lite calls (listing pads, requesting text from a pad, etc.).
+*/
 var express = require('express');
 var router = express.Router();
 var etherpad_api = require('../modules/etherpad-api');
