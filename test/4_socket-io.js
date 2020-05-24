@@ -26,7 +26,7 @@ describe('test socket.io', () => {
     client.close();
   });
 
-  it('connects socket.io server and client.', (done) => {
+  it('connects socket.io server and client', (done) => {
     client.on('connect', () => {
       done();
     });
