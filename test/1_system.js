@@ -1,7 +1,7 @@
 /*
-Tests for system calls through node server.
-The file system and child processes functions used in the app
-are the ones being tested here.
+  Tests for system calls through node server.
+  The file system and child processes functions used in the app
+  are the ones being tested here.
 */
 const chai = require('chai');
 const path = require('path');
