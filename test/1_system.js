@@ -45,6 +45,14 @@ describe('test system calls through node', () => {
       fs.write(fd, text, (err, written) => {
         if (err) throw err;
         chai.assert.isNotNaN(written);
+
+        // test file contents are correct
+        exec('cat ' + pathToFile, (err, stdout, stderr) => {
+          if (err) throw err;
+          if (stderr) throw stderr;
+          chai.assert.equal(text, stdout);
+        });
+
         // close file descriptor
         fs.close(fd, (err) => {
           if (err) throw err;
