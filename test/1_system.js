@@ -51,12 +51,12 @@ describe('test system calls through node', () => {
           if (err) throw err;
           if (stderr) throw stderr;
           chai.assert.equal(text, stdout);
-        });
 
-        // close file descriptor
-        fs.close(fd, (err) => {
-          if (err) throw err;
-          done();
+          // close file descriptor
+          fs.close(fd, (err) => {
+            if (err) throw err;
+            done();
+          });
         });
       });
     });
