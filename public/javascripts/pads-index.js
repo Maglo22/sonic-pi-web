@@ -1,11 +1,11 @@
-$(document).ready(function() {
+$(document).ready(() => {
 	var socket = io();
 
 	listPads(); // list all pads in db
 
-	$('#create').click(function() {
+	$('#create').click(() => {
 		if ($('#newPadID').val()) {
-			createPad($('#newPadID').val());
+			createPad($('#newPadID').val(), socket);
 		} else {
 			$('#newPadID').notify('// the pad needs a name', {
 				position: 'right',
@@ -16,13 +16,13 @@ $(document).ready(function() {
 		}
 	});
 
-	$('#deletePad').click(function() {
+	$('#deletePad').click(() => {
 		let padID = $('#deleteID').text();
-		deletePad(padID);
+		deletePad(padID, socket);
 		$('#modalDelete').fadeToggle('fast'); // toggle modal
 	});
 
-	$('#joinPad').click(function() {
+	$('#joinPad').click(() => {
 		let username = $('#username').val();
 		let usercolor = $('#usercolor').val();
 		
@@ -45,18 +45,22 @@ $(document).ready(function() {
 		}
 	});
 
+	socket.on('update-list', () => {
+		updateTable();
+	});
+
 });
 
 // list all ether pads
 function listPads() {
-	$.get('/pads', function(res) {
+	$.get('/pads', (res) => {
 		let pads = res.padIDs;
 
 		// open table body
 		let tableHTML = '<tbody>';
 		$('#padList').append(tableHTML);
 
-		pads.forEach(function(pad) {
+		pads.forEach((pad) => {
 			let btnJoin = '<button class="button modalOpen" id="' + pad + '.join">join</button>';
 			let btnDelete = '<button class="button button-danger modalOpen" id="' + pad + '.delete">delete</button>';
 			let row = '<tr><td>' + pad + '</td><td>' + btnJoin + btnDelete + '</td></tr>';
@@ -66,11 +70,11 @@ function listPads() {
 
 		$('#padList').append('</tbody>'); // close table body
 	})
-	.done(function() {
+	.done(() => {
 		//$.notify('Pad list retrieved', 'info');
 		$('#padList').fadeIn('fast');
 	})
-	.fail(function(error) {
+	.fail((error) => {
 		$.notify('// error getting the pad list: ' + error.responseJSON.message, {
 			style: 'transparent',
 			className: 'error' 
@@ -80,26 +84,27 @@ function listPads() {
 
 // update (redraw) table
 function updateTable() {
-	$('#padList').fadeOut('fast', function() {
+	$('#padList').fadeOut('fast', () => {
 		$('#padList tbody').empty();
 		listPads();
 	});
 }
 
 // create a new pad (groupless, for now)
-function createPad(padID) {
-	$.get('/pads/new/' + padID, function(res) {
+function createPad(padID, socket) {
+	$.get('/pads/new/' + padID, (res) => {
 		//console.log(res);
 	})
-	.done(function() {
+	.done(() => {
 		$.notify('// pad created', {
 			style: 'transparent',
 			className: 'success' 
 		});
-		updateTable();
+		socket.emit('emit-update');
+		//updateTable();
 		$('#newPadID').val('');
 	})
-	.fail(function(error) {
+	.fail((error) => {
 		$.notify('// error creating pad: ' + error.responseJSON.message, {
 			style: 'transparent',
 			className: 'error' 
@@ -108,18 +113,19 @@ function createPad(padID) {
 }
 
 // delete a registered pad
-function deletePad(padID) {
-	$.get('/pads/delete/' + padID, function(res) {
+function deletePad(padID, socket) {
+	$.get('/pads/delete/' + padID, (res) => {
 		//console.log(res);
 	})
-	.done(function() {
+	.done(() => {
 		$.notify('// Pad deleted', {
 			style: 'transparent',
 			className: 'success' 
 		});
-		updateTable();
+		socket.emit('emit-update');
+		//updateTable();
 	})
-	.fail(function(error) {
+	.fail((error) => {
 		$.notify('// error deleting pad: ' + error.responseJSON.message, {
 			style: 'transparent',
 			className: 'error' 
