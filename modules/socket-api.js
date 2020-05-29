@@ -8,7 +8,6 @@ const etherpad_api = require('../modules/etherpad-api');
 const system = require('./system');
 const path = require('path');
 // streams
-const { Readable } = require('stream'); // node streams
 const { RtAudio, RtAudioFormat } = require('audify'); // audify streams
 const ss = require('socket.io-stream'); // socket.io-stream
 
@@ -16,9 +15,6 @@ const ss = require('socket.io-stream'); // socket.io-stream
 const dir = path.join(__dirname, '..', 'pad_files/');
 
 const rtAudio = new RtAudio();
-const inStream = new Readable({
-  read() {}
-});
 
 io.on('connection', (socket) => {
   // play content on pad
@@ -47,7 +43,6 @@ io.on('connection', (socket) => {
       if (rtAudio.isStreamRunning()) {
         rtAudio.stop();
       }
-      inStream.pause(); // tell the readable stream there is nothing more to read
       rtAudio.closeStream();
     }
   });
@@ -55,11 +50,12 @@ io.on('connection', (socket) => {
   // notification for users in pad
   socket.on('notify', (msg, style, classname) => { io.emit('notify', msg, style, classname); });
 
+  // update list of pads
+  socket.on('emit-update', () => { io.emit('update-list'); });
+
   // audio stream
   socket.on('client-stream-request', (padID) => {
     console.log('streaming audio from: // ' + padID);
-
-    var stream = ss.createStream(); // duplex stream
     
     // audify stream (capture audio from input device)
     if (!rtAudio.isStreamOpen()) {
@@ -74,7 +70,7 @@ io.on('connection', (socket) => {
         44100,
         1024,
         'Sonic-Pi',
-        pcm => inStream.push(pcm) // push pcm data from input device to readable stream
+        pcm => ss(socket).emit('chunk', pcm) // raw pcm data
       );
     }
 
@@ -82,15 +78,7 @@ io.on('connection', (socket) => {
       rtAudio.start();
     }
 
-    ss(socket).emit('audio-stream', stream);
-
-    if (inStream.isPaused()) {
-      inStream.resume();
-    }
-
-    inStream.pipe(stream); // pipe readable stream to duplex stream
   });
-
 });
 
 
