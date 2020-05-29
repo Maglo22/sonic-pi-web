@@ -13,6 +13,7 @@ $(document).ready(() => {
     $('#run').click(() => {
         socket.emit('notify', '// Running...', 'transparent', 'success');
         socket.emit('run pad', $('#padID').text());
+        //socket.emit('client-stream-request', $('#padID').text());
     });
 
     $('#stop').click(() => {
@@ -26,7 +27,9 @@ $(document).ready(() => {
             className: classname
         });
     });
+
+    /*ss(socket).on('chunk', function(chunk) {
+        console.log(chunk);
+    });*/
+
 });
-
-
-
