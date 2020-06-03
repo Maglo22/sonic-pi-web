@@ -2,6 +2,39 @@
 
 Sonic-Pi-Web is a collaborative environment for Sonic Pi. It allows multiple users edit the same file in real time.
 
+# Quick Start
+
+## Installation
+
+1. Make sure you have [Node](https://nodejs.org/en/) installed.
+
+2. Clone the repository.
+
+3. Inside the root directory run `npm install` to install dependencies.
+
+4. Install [Etherpad-lite](https://github.com/ether/etherpad-lite).
+
+5. Install [Sonic Pi](https://sonic-pi.net/).
+    * _Note: Recent updates moved some files in Sonic Pi, which makes **sonic-pi-tool** fail to locate things properly; for now, is best to use a Sonic Pi version before 3.2_.
+
+6. Install [sonic-pi-tool](https://github.com/lpil/sonic-pi-tool).
+
+## Configuration
+
+1. Run your instance of Etherpad-lite. A key will be generated in `APIKEY.txt`.
+
+2. Copy this key to the file `/modules/etherpad-api.example.js`. For the tests to work, its also necessary to copy the key to `/test/3_etherpad-lite.js`
+
+3. Either make a copy of this file and remove the `.example`, or just remove it from the original.
+
+## Running
+
+1. Run Etherpad-lite.
+
+2. Run Sonic Pi through sonic-pi-tool: `sonic-pi-tool start-server`.
+
+3. Run the application either with: `DEBUG=sonic-pi-web:* npm start` or just `npm start`.
+
 # Technologies
 
 The app integrates different technologies to achieve the collaboration of multiple users in real time, editing the same document of Sonic Pi.
